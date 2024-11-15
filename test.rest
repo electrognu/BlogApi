@@ -42,8 +42,8 @@ POST {{url}}/api/authors
 Content-Type: application/json
 
 {
-    "name": "Autor1",
-    "email": "autor1@ejemplo.com",
+    "name": "Autor101",
+    "email": "autor101@ejemplo.com",
     "image": "https://picsum.photos/200/300"
 }
 
