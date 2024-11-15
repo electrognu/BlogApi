@@ -1,0 +1,49 @@
+@url = http://localhost:3000
+
+//////////////////
+//     POSTS : 
+//////////////////
+
+// GET ALL POSTS
+GET {{url}}/api/posts
+###
+
+// GET ALL POSTS QUERY (PAGE+LIMIT)
+GET {{url}}/api/posts?page=2&limit=5
+###
+
+// GET ALL POSTS FROM A AUTHOR
+GET {{url}}/api/posts/Autor1
+###
+
+// INSERT NEW POST
+POST {{url}}/api/posts
+Content-Type: application/json
+
+{
+    "title": "Aventuras en el Node planet",
+    "description": "Este es mi nuevo libro fantastico de aventuras increibles",
+    "creation_date":"2024-08-07",
+    "categorie": "B",
+    "author_id": "10"
+}
+###
+
+//////////////////
+//     AUTHORS : 
+//////////////////
+
+// GET ALL AUTHORS OFF THE BLOG
+GET {{url}}/api/authors
+###
+
+// CREATE A NEW AUTHOR
+POST {{url}}/api/authors
+Content-Type: application/json
+
+{
+    "name": "Author1",
+    "email": "autor1@ejemplo.com",
+    "image": "https://picsum.photos/200/300"
+}
+
