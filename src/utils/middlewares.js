@@ -13,11 +13,20 @@ const checkAuthorId = async (req, res, next) => {
 const verifyNewAuthor = async (req, res, next) => {
     const [auth] = await authorExistByName(req.body.name);
     if (auth.length === 0) {
-        res.status(400).json({})
+        next();
+    } else {
+        res.status(400).json({ error: "The author already exist in the DB" })
     }
-    res.json(auth);
 }
 
+const verifyNonDuplicatedEmail = async (req, res, next) => {
+    const [email] = await duplicatedEmail(req.body.email);
+    if (email.length === 0) {
+        next();
+    } else {
+        res.status(400).json({ error: "The email already exist in the DB" })
+    }
+}
 
 // USED BY MIDDLEWARE : 
 // if it finds author_id returns array with object id, if not returns empty array.
@@ -37,9 +46,19 @@ function authorExistByName(auth_name) {
         WHERE name = ?
         LIMIT 1;`, [auth_name]
     );
-
 }
 
+// if it finds auth_email returns array with object email, if not returns empty array.
+function duplicatedEmail(auth_email) {
+    return pool.query(
+        `SELECT email
+        FROM authors
+        WHERE email = ?
+        LIMIT 1;`, [auth_email]
+    );
+}
+
+
 module.exports = {
-    checkAuthorId, verifyNewAuthor
+    checkAuthorId, verifyNewAuthor, verifyNonDuplicatedEmail
 }
