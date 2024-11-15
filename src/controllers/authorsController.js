@@ -14,7 +14,7 @@ const getAuthors = async (req, res, next) => {
 const createAuthor = async (req, res, next) => {
     try {
         const [result] = await insertAuthor(req.body);
-        res.json(result);
+        res.json({ id: result.insertId, author: req.body.name });
     } catch (error) {
         next(error);
     }

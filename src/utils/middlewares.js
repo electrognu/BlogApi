@@ -4,7 +4,7 @@ const pool = require("../config/db");
 const checkAuthorId = async (req, res, next) => {
     const [auth] = await authorExistById(req.body.author_id);
     if (auth.length === 0) {
-        res.status(400).json({ message: "Error, the author don't exists.  " })
+        res.status(404).json({ message: "Error, the author don't exists.  " })
     } else {
         next();
     }
@@ -15,7 +15,7 @@ const verifyNewAuthor = async (req, res, next) => {
     if (auth.length === 0) {
         next();
     } else {
-        res.status(400).json({ error: "The author already exist in the DB" })
+        res.status(409).json({ error: "The author already exist in the DB" })
     }
 }
 
@@ -24,7 +24,7 @@ const verifyNonDuplicatedEmail = async (req, res, next) => {
     if (email.length === 0) {
         next();
     } else {
-        res.status(400).json({ error: "The email already exist in the DB" })
+        res.status(409).json({ error: "The email already exist in the DB" })
     }
 }
 

@@ -3,7 +3,6 @@ const { verifyNewAuthor, verifyNonDuplicatedEmail } = require('../../utils/middl
 
 const router = require('express').Router();
 
-
 router.get('/', getAuthors);
 router.post('/', verifyNewAuthor, verifyNonDuplicatedEmail, createAuthor);
 

@@ -8,7 +8,7 @@
 GET {{url}}/api/posts
 ###
 
-// GET ALL POSTS QUERY (PAGE+LIMIT)
+// GET POSTS BY QUERY (PAGE+LIMIT)
 GET {{url}}/api/posts?page=2&limit=5
 ###
 
@@ -42,8 +42,8 @@ POST {{url}}/api/authors
 Content-Type: application/json
 
 {
-    "name": "Autor20",
-    "email": "autor21@ejemplo.com",
+    "name": "Autor1",
+    "email": "autor1@ejemplo.com",
     "image": "https://picsum.photos/200/300"
 }
 

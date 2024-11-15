@@ -1,99 +1,47 @@
-# Express Base Application for API Creation
+# Express application for API Blogger, reduced version.
 
-This is a basic Express application template designed to help you create APIs
-quickly. It includes essential configurations and setup for starting an Express
-server.
+# API query list 
+Tasks to acomplish:
+    - DB creation with tables and all the fields.
+    - Creation of the Express project.
+    - Creation of the necessary routes to establish the API base.
+    - Creation of the URLs for the recovery and creation of new posts within the database.
+    - Creation of the necessary URLs for the recovery and creation of new authors within the database.
+    - Creation of the route that allows us to recover all the posts of a specific author from the recovery of said author from the URL.
 
-## Features
 
-- Basic Express server setup
-- CORS enabled
-- Environment configuration with `.env` support
+## GET - Retrieve all or a page of posts, with Author data.
+GET /api/posts/
+Body : X
+Headers : X
+Response :
+- Array with all posts objects in descendent order by post.id, with Author data included in each one.
+- If no query, all posts are retuned
+- If Query: "page" and "limit". Limit sets the number of returned posts. And page is where the sqlquery starts. By default page=1 and limit=10 if one of both is ommited. Both ommited return all posts.
+- In case page or limit is not a number an error object is retuned.
+- In case empty array is returned the page selected is out of range. 
 
-## Getting Started
+## GET - Retrieve all the posts BY an Author in URL,  with Author data.
+GET /api/posts/AUTHOR
+Body : X
+Headers : X
+Response :
+- Array with all posts objects, with Author data included in each one.
+- If no post has been found, response is an empty object (the Author has no entries already or the Author not exist!!)
+-
 
-### Prerequisites
+## POST - New post creation.
+POST /api/posts
+Body: title, description, creation_date, categorie, author_id
+Headers: X
+Response : 
+- Object with the created post
+- In case the "author_id" does not exist, error is thrown
 
-Ensure you have Node.js and npm installed on your machine. You can download them
-from [Node.js official website](https://nodejs.org/).
-
-### Installation
-
-1. **Clone the repository:**
-
-```bash
-git clone https://github.com/mariogiron/express-init-template.git project-name
-```
-
-2. **Navigate to the project directory:**
-
-```bash
-cd project-name
-```
-
-3. **Install the dependencies:**
-
-```bash
-npm install
-```
-
-### Environment Configuration
-
-Create a `.env` file in the root of the project and configure your environment
-variables. An example `.env` file might look like this:
-
-```
-PORT=3000
-```
-
-### Running the Application
-
-#### Start the server
-
-Start the server by running:
-
-```bash
-npm start
-```
-
-The server will start and listen on the port defined in your `.env` file, or
-default to port 3000 if not specified.
-
-#### Development mode
-
-To start the server in development mode with `nodemon`, which will automatically
-restart the server on file changes, run:
-
-```bash
-npm run dev
-```
-
-### Available Scripts
-
-- **start**: Runs `node index.js` to start the server.
-- **dev**: Runs `nodemon index.js` to start the server in development mode with
-  automatic restarts on file changes.
-- **generate**: Runs `express generate` to create any resource inside your
-  project. The actions available are "model", "controller", "route", "all"
-- **config**: Runs `express config` to config the date of your project.
-
-### Project Structure
-
-    ├── src
-    │   ├── app.js          # Express app configuration
-    │   ├── models          # Data models
-    │   ├── controllers     # Route controllers
-    │   ├── routes          # Application routes
-    ├── .env                # Environment variables
-    ├── index.js            # Server creation and configuration
-    ├── package.json        # Project metadata and dependencies
-
-### Contributing
-
-Feel free to submit issues and pull requests to improve the project. For major
-changes, please open an issue first to discuss what you would like to change.
-
-### License
-
-This project is licensed under the ISC License - see the LICENSE file for
-details.
+## POST - Create new Author
+POST /api/authors
+Body: id, name, email, image
+Headers: X
+Response : 
+- Object with the created Author when the Author is created.
+- In case the the name of the author or the email is already in the DB throws an error.
