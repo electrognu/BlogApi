@@ -12,7 +12,7 @@ GET {{url}}/api/posts
 GET {{url}}/api/posts?page=2&limit=5
 ###
 
-// GET ALL POSTS FROM A AUTHOR
+// GET ALL POSTS FROM A AUTHOR NAME
 GET {{url}}/api/posts/Autor1
 ###
 

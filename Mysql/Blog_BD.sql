@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS `BlogApp_DB`.`authors` (
   `email` VARCHAR(60) NOT NULL,
   `image` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -33,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `BlogApp_DB`.`posts` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_posts_author_idx` (`author_id` ASC) VISIBLE,
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC) VISIBLE
   CONSTRAINT `fk_posts_author`
     FOREIGN KEY (`author_id`)
     REFERENCES `BlogApp_DB`.`authors` (`id`)
